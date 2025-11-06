@@ -3,8 +3,8 @@ from urllib import request, parse
 
 def send_slack_error( 
   context,
-  channel = 'airflow-errors',
-  url_hook = 'https://hooks.slack.com/services/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'
+  channel = 'xxxxxxxxxxxxxxx',
+  url_hook = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
   ):
   try:
     task_instance = context.get('task_instance')
