@@ -27,10 +27,10 @@ AIRFLOW_RUN_DETAILS = {
 }
 
 
-ATHENA_TABLE_SCHEMA = 'temp_db'
-ATHENA_TABLE_NAME = 'icd_codes_teste'
-ATHENA_OUTPUT_TABLE_LOCATION = f's3://claims-management-data-lake/warehouse/{ATHENA_TABLE_SCHEMA}/{ATHENA_TABLE_NAME}/'
-ATHENA_QUERY_OUTPUT_LOCATION = 's3://claims-management-athena-results/ClaimsManagementDataCatalog/'
+ATHENA_TABLE_SCHEMA = 'xxxxxxxxxxxxxxxxxxxxxxxx'
+ATHENA_TABLE_NAME = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
+ATHENA_OUTPUT_TABLE_LOCATION = f'xxxxxxxxxxxxxxxxxx{ATHENA_TABLE_SCHEMA}/{ATHENA_TABLE_NAME}/'
+ATHENA_QUERY_OUTPUT_LOCATION = 'xxxxxxxxxxxxxxxxxxxxx'
 
 
 ATHENA_ICD_DDL = f"""
@@ -84,15 +84,15 @@ with DAG(
       wait_for_downstream=True,
   )
   
-  # create_icd_code_table = PythonOperator(
-  #   task_id             = 'create_icd_table',
-  #   python_callable     = athena_query_execution_wr,
-  #   op_kwargs           = {
-  #     'sql': ATHENA_ICD_DDL,
-  #     'database': 'temp_db',
-  #     's3_output': ATHENA_QUERY_OUTPUT_LOCATION,
-  #   }
-  # )
+  create_icd_code_table = PythonOperator(
+    task_id             = 'create_icd_table',
+    python_callable     = athena_query_execution_wr,
+    op_kwargs           = {
+      'sql': ATHENA_ICD_DDL,
+      'database': 'temp_db',
+      's3_output': ATHENA_QUERY_OUTPUT_LOCATION,
+    }
+  )
   
   extract_icd_code = ContainerOperator_Single_Server(
     name="airflow-dag_icd",
