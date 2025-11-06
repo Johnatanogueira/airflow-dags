@@ -128,10 +128,10 @@ def postgres_read_sql_query_wr(secret_id, sql):
     with wr.postgresql.connect(secret_id=secret_id) as con:
         return wr.postgresql.read_sql_query(sql=sql, con=con)
 
-def athena_query_wr(sql, database = 'temp_db', s3_output = 's3://claims-management-athena-results/ClaimsManagementDataCatalog'):
+def athena_query_wr(sql, database = 'temp_db', s3_output = 'xxxxxxxxxxxxxxxxxxx'):
     return wr.athena.read_sql_query(sql=sql, database=database, s3_output=s3_output)
 
-def athena_query_execution_wr(sql, database = 'temp_db', s3_output = 's3://claims-management-athena-results/ClaimsManagementDataCatalog', wait=True):
+def athena_query_execution_wr(sql, database = 'temp_db', s3_output = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', wait=True):
     print(sql)
     wr.athena.start_query_execution(
         sql=sql,
@@ -181,8 +181,8 @@ def athena_execute_from_file(file_path, **file_kwargs):
 
     wr.athena.start_query_execution(
         sql= sql,
-        database='temp_db',
-        s3_output='s3://claims-management-athena-results/ClaimsManagementDataCatalog',
+        database='xxxxxxxxxx',
+        s3_output='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
         wait=True
     )
 
@@ -191,10 +191,10 @@ def athena_purge_table(database, table):
     
     wr.athena.start_query_execution(
         sql =   f"DROP TABLE IF EXISTS {database}.{table}",
-        database =  'temp_db',
-        s3_output =  's3://claims-management-athena-results/ClaimsManagementDataCatalog',
+        database =  'xxxxxxxxxxxxxxxxxx',
+        s3_output =  'xxxxxxxxxxxxxxxxxxxxxxxxxxx',
         wait =  True
     )
     
-    athena_output_table_location:str = f's3://claims-management-data-lake/warehouse/{database}/{table}'
+    athena_output_table_location:str = f'xxxxxxxxxxxxxxxxxxxxxxxx/{database}/{table}'
     wr.s3.delete_objects(path=athena_output_table_location)
