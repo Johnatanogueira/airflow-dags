@@ -3,7 +3,7 @@ from botocore.exceptions import ClientError
 
 def get_secret(
     secret_name:str,
-    region_name:str = "us-east-1"
+    region_name:str = "xxxxxxxxx"
   ):
 
   # Create a Secrets Manager client
